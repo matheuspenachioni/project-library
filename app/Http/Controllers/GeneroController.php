@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Genero;
+use Exception;
 use Illuminate\Http\Request;
 
 class GeneroController extends Controller
@@ -37,7 +38,9 @@ class GeneroController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate($this->getRules());
+        $request->validate($this->getRules(), 
+             $this->getRulesMessages()
+        );
         
         $genero = new Genero();
         $genero->nome = $request->input('nome');
@@ -88,7 +91,9 @@ class GeneroController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate($this->getRules());
+        $request->validate($this->getRules(), 
+             $this->getRulesMessages()
+        );
         
         $genero = Genero::find($id);
         
@@ -110,10 +115,15 @@ class GeneroController extends Controller
     public function destroy($id)
     {
         $genero = Genero::find($id);
+
+        try{
+            $genero->delete();
+            return redirect(route('generos.index'));
+        } catch(Exception $e){
+            return abort(404);
+        }
+            
         
-        $genero->delete();
-        
-        return redirect(route('generos.index'));
     }
 
     public static function getGeneros(){
@@ -134,7 +144,7 @@ class GeneroController extends Controller
         $msg = [
             'nome.*' => 'Digite o nome do gênero! Permitido até 200 caracteres',
             'descricao.*' => 'Digite a descrição do gênero! Permitido até 100 caracteres',
-            'categoria.*' => 'Digite a categoria do gÊnero! Perimitido até 100 caracteres'
+            'categoria.*' => 'Digite a categoria do gênero! Perimitido até 100 caracteres'
         ];
         return $msg;
     }

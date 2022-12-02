@@ -1,18 +1,18 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('T&D Library: Bem-vindo ' . Auth::user()->name ) }}
+        <h2 class="text-center font-semibold text-xl text-gray-800 leading-tight">
+            Bem vindo ao <span class="text-danger">T&D Library</span>! Você está logado como <span class="text-danger">{{ Auth::user()->name }}</span>
         </h2>
     </x-slot>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    <a href="{{ route('livros.create') }}">Novo livro</a> |
-                    <a href="{{ route('generos.create') }}">Novo gênero</a> |
-                    <a href="{{ route('livros.index') }}">Listar livros</a> |
-                    <a href="{{ route('generos.index') }}">Listar gêneros</a>
+                <div class="p-6 text-gray-900 text-center">
+                    <a class="btn btn-primary" href="{{ route('livros.create') }}">Novo livro</a>
+                    <a class="btn btn-primary" href="{{ route('generos.create') }}">Novo gênero</a>
+                    <a class="btn btn-primary" href="{{ route('livros.index') }}">Listar livros</a>
+                    <a class="btn btn-primary" href="{{ route('generos.index') }}">Listar gêneros</a>
                 </div>
             </div>
         </div>

@@ -39,6 +39,6 @@
             </tbody>
         </table>
     @else
-        <h3>No studio was found!</h3>
+        <h3 class="text-muted">Nenhum gênero foi encontrado!</h3>
     @endif
 @endsection

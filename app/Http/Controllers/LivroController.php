@@ -39,7 +39,9 @@ class LivroController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate($this->getRules());
+        $request->validate($this->getRules(), 
+             $this->getRulesMessages()
+        );
         
         $livro = new Livro();
         $livro->titulo = $request->input('titulo');
@@ -94,7 +96,9 @@ class LivroController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate($this->getRules());
+        $request->validate($this->getRules(), 
+             $this->getRulesMessages()
+        );
         
         $livro = Livro::find($id);
     
@@ -129,7 +133,8 @@ class LivroController extends Controller
             'titulo' => 'required|max:200',
             'paginas' => 'required|max:400',
             'autor' => 'required|max:100',
-            'editora' => 'required|max:100'
+            'editora' => 'required|max:100',
+            'genero' => 'required'
         ];
         return $rules;
     }
@@ -139,7 +144,8 @@ class LivroController extends Controller
             'titulo.*' => 'Digite o título do livro! Permitido até 200 caracteres',
             'paginas.*' => 'Digite a quantidade de páginas! Permitido até 4 digitos',
             'autor.*' => 'Digite o nome do autor do livro! Perimitido até 100 caracteres',
-            'editora.*' => 'Digite o nome da editora do livro! Permitido até 100 caracteres'
+            'editora.*' => 'Digite o nome da editora do livro! Permitido até 100 caracteres',
+            'genero.*' => 'Escolha um gênero!'
         ];
         return $msg;
     }
